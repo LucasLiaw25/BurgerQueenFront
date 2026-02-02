@@ -1,0 +1,32 @@
+<app-header></app-header>
+
+<main class="min-h-screen bg-white">
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    
+    <h1 id="menu-title" class="text-5xl font-black text-gray-900 mb-16 text-center">
+      Our Full Menu
+    </h1>
+
+    <div *ngFor="let group of groupedMenu" class="mb-20">
+      
+      <div class="flex items-center gap-4 mb-10">
+        <h2 class="text-2xl font-extrabold text-[#E65100] whitespace-nowrap uppercase tracking-widest">
+          {{ group.categoryName }}
+        </h2>
+        <div class="h-[2px] w-full bg-gray-100"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <app-product-card 
+          *ngFor="let item of group.products" 
+          [product]="item">
+        </app-product-card>
+      </div>
+
+    </div>
+
+  </section>
+</main>
+
+<app-first-order></app-first-order>
+<app-footer></app-footer>

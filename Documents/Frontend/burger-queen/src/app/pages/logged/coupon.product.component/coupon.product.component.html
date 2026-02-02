@@ -1,0 +1,31 @@
+<app-header></app-header>
+<div class="promo-page-container">
+  <div class="promo-header">
+    <span class="badge">OFERTA ATIVADA: {{ couponCode }}</span>
+    <h2>Excelente escolha! Veja seu desconto:</h2>
+  </div>
+
+  <div class="product-promo-detail" *ngIf="product() as p">
+    <div class="image-side">
+      <img [src]="p.imageUrl" [alt]="p.name">
+    </div>
+
+    <div class="info-side">
+      <h1>{{ p.name }}</h1>
+      
+      <div class="price-box">
+        <span class="old-price">{{ p.price | currency:'BRL' }}</span>
+        <span class="new-price">Preço com Cupom Aplicado</span>
+        <p class="disclaimer">*O desconto será confirmado no carrinho.</p>
+      </div>
+
+      <button class="btn-confirm" (click)="adicionarAoCarrinho()">
+        Aproveitar Desconto Agora
+      </button>
+      <a routerLink="/menu" class="back-link">Voltar ao menu</a>
+    </div>
+  </div>
+</div>
+
+<app-first-order></app-first-order>
+<app-footer></app-footer>

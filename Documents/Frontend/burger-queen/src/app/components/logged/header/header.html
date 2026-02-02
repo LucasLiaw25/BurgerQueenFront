@@ -1,0 +1,41 @@
+<header class="header-container">
+  <div class="logo-section" [routerLink]="['/home']" style="cursor: pointer;">
+    <div class="bq-circle">
+      <span class="letter-b">B</span><span class="letter-q">Q</span>
+    </div>
+    <span class="brand-name">BURGER QUEEN</span>
+  </div>
+
+  <nav class="nav-menu">
+    <a [routerLink]="['/home']" class="nav-link" routerLinkActive="active">Home</a>
+    <a [routerLink]="['/menu']" class="nav-link" routerLinkActive="active">Menu</a>
+    <a [routerLink]="['/about']" class="nav-link" routerLinkActive="active">About</a>
+    <a [routerLink]="['/coupon']" class="nav-link" routerLinkActive="active">Coupon</a>
+  </nav>
+
+  <div class="header-actions">
+    
+    <div class="search-wrapper">
+      <input 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        (keyup.enter)="onSearch()"
+        placeholder="Search burger..." 
+        class="search-input"
+      />
+      <button class="icon-btn search-btn" (click)="onSearch()">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+    
+    <div class="cart-wrapper" (click)="openCart()">
+      <i class="fas fa-shopping-cart cart-icon"></i>
+      <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+    </div>
+
+    <button class="user-nav-btn" [routerLink]="['/user']">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+  </div>
+</header>

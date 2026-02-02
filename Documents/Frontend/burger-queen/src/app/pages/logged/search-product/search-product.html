@@ -1,0 +1,33 @@
+<app-header></app-header>
+
+<main class="search-container">
+  <div class="search-header">
+    <h2>Resultados para: "<span>{{ searchTerm }}</span>"</h2>
+    <p>{{ results.length }} produtos encontrados</p>
+  </div>
+
+  <div *ngIf="loading" class="loader">
+    <i class="fas fa-spinner fa-spin"></i> Buscando os melhores burgers...
+  </div>
+
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
+      <app-product-card 
+        *ngFor="let item of results" 
+        [product]="item">
+    </app-product-card>
+    </div>
+  </section>
+
+<div *ngIf="loading" class="loader">
+  <i class="fas fa-spinner fa-spin"></i> Buscando...
+</div>
+
+  <div class="no-results" *ngIf="!loading && results.length === 0">
+    <i class="fas fa-search-minus"></i>
+    <p>Nenhum burger encontrado com esse nome.</p>
+    <button routerLink="/home">Voltar ao Cardápio</button>
+  </div>
+</main>
+<app-first-order></app-first-order>
+<app-footer></app-footer>

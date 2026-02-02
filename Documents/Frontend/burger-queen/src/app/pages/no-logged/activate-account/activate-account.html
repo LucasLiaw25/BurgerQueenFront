@@ -1,0 +1,40 @@
+<div class="activation-container">
+    <div class="success-toast" *ngIf="successMessage">
+        <i class="fas fa-check-circle"></i>
+        {{ successMessage }}
+    </div>
+  <div class="activation-card">
+    <div class="icon-box">
+      <i class="fas fa-envelope-open-text"></i>
+    </div>
+    
+    <h2>Verifique seu E-mail</h2>
+    <p>Enviamos um código de 5 dígitos para o seu e-mail. Digite-o abaixo para ativar sua conta Burger Queen.</p>
+
+    <div class="code-input-single">
+      <input 
+        type="text"
+        inputmode="text" 
+        pattern="[A-Z0-9]*"
+        maxlength="5"
+        [(ngModel)]="activationCode"
+        (input)="onInput($event)"
+        (keydown)="onKeyDown($event)"
+        (paste)="onPaste($event)"
+        class="single-digit-input"
+        [class.error]="errorMessage"
+        [disabled]="loading"
+        placeholder="Digite o código de 5 dígitos"
+        autocomplete="off"
+        autocapitalize="characters" 
+      />
+    </div>
+
+    <p class="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <button class="resend-btn" (click)="activate()" [disabled]="loading || activationCode.length < 5">
+      {{ loading ? 'Verificando...' : 'Ativar Conta' }}
+    </button>
+    
+  </div>
+</div>

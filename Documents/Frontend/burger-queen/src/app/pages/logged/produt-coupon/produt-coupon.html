@@ -1,0 +1,81 @@
+<app-header></app-header>
+
+<div class="toast-container">
+  <div class="success-toast" *ngIf="successMessage">
+    <i class="fas fa-check-circle"></i> {{ successMessage }}
+  </div>
+  
+  <div class="error-toast" *ngIf="errorMessage">
+    <i class="fas fa-exclamation-triangle"></i> {{ errorMessage }}
+  </div>
+</div>
+
+<main class="coupon-detail-page" *ngIf="product" [class.blurred]="generatedCoupon">
+  <div class="container">
+    
+    <div class="coupon-wrapper">
+      <div class="visual-side">
+        <div class="image-container">
+          <img [src]="product.imageUrl" [alt]="product.name">
+          <div class="discount-float">-25% OFF</div>
+        </div>
+      </div>
+
+      <div class="content-side">
+        <nav class="breadcrumb">
+          <a routerLink="/coupon">← Voltar para Cupons</a>
+        </nav>
+
+        <span class="offer-label">Oferta Exclusiva Burger Queen</span>
+        <h1>{{ product.name }}</h1>
+        <p class="description">{{ product.description }}</p>
+
+        <div class="pricing-card">
+          <div class="price-info">
+            <span class="label">De:</span>
+            <span class="old-value">{{ product.price | currency:'BRL' }}</span>
+          </div>
+          <div class="price-info">
+            <span class="label">Por apenas:</span>
+            <span class="new-value">{{ product.discountedPrice | currency:'BRL' }}</span>
+          </div>
+        </div>
+
+        <div class="rules">
+          <p><i class="fas fa-info-circle"></i> Válido por 24 horas após o resgate.</p>
+          <p><i class="fas fa-check"></i> Uso individual por CPF.</p>
+        </div>
+
+        <button class="btn-generate" (click)='claimCoupon()' [disabled]="loading">
+          <i class="fas" [class.fa-bolt]="!loading" [class.fa-spinner]="loading" [class.fa-spin]="loading"></i>
+          {{ loading ? 'PROCESSANDO...' : 'GERAR MEU CUPOM' }}
+        </button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div class="coupon-overlay" *ngIf="generatedCoupon" (click)="generatedCoupon = null; successMessage = ''">
+  <div class="coupon-card-modal" (click)="$event.stopPropagation()">
+    <div class="ticket-header">
+      <i class="fas fa-ticket-alt"></i>
+      <h3>CUPOM DISPONÍVEL!</h3>
+    </div>
+    <div class="ticket-body">
+      <p>Clique no código para copiar:</p>
+      
+      <div class="code-box" (click)="copyToClipboard(generatedCoupon.code)" [class.copied]="copySuccess">
+        <span>{{ generatedCoupon.code }}</span>
+        <i class="fas" [class.fa-copy]="!copySuccess" [class.fa-check]="copySuccess"></i>
+      </div>
+      
+      <p class="copy-feedback" *ngIf="copySuccess">Código copiado!</p>
+      <small>Válido até: {{ generatedCoupon.expiresAt | date:'dd/MM/yyyy HH:mm' }}</small>
+    </div>
+    <button class="btn-close" (click)="generatedCoupon = null; successMessage = ''">FECHAR</button>
+  </div>
+</div>
+
+<app-first-order></app-first-order>
+<app-footer></app-footer>

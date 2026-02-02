@@ -1,0 +1,49 @@
+<div class="cart-overlay" *ngIf="isVisible" (click)="closeCart()"></div>
+
+<div class="side-cart-panel" [class.open]="isVisible">
+  <div class="cart-header">
+    <h3>Seu Carrinho</h3>
+    <button class="close-icon" (click)="closeCart()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="cart-body">
+    <div *ngIf="(currentOrder?.items?.length ?? 0) === 0" class="empty-state">
+      <i class="fas fa-shopping-basket"></i>
+      <p>Seu carrinho está vazio.</p>
+    </div>
+
+    <div class="success-toast" *ngIf="showSuccessMessage()">
+      <div class="toast-content">
+        <i class="fas fa-check-circle"></i>
+        <span>Pedido gerado! Redirecionando para o pagamento...</span>
+      </div>
+    </div>
+
+    <div class="cart-item" *ngFor="let item of currentOrder?.items">
+  
+      <div class="item-img-container">
+        <img [src]="item.product.imageUrl || 'assets/images/default-burger.png'" 
+            [alt]="item.product.name">
+      </div>
+
+      <div class="item-details">
+        <h4>{{ item.product.name }}</h4>
+        <p>{{ item.quantity }}x | {{ item.priceAtTime | currency:'BRL' }}</p>
+      </div>
+
+      <button class="btn-remove" (click)="onRemove(item.product.id)">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </div>
+  </div>
+
+<div class="cart-footer">
+  <button class="checkout-btn" (click)="finalizarPedido()" [disabled]="isProcessing()">
+    <span *ngIf="!isProcessing()">Finalizar Pedido</span>
+    <span *ngIf="isProcessing()">
+        <i class="fas fa-spinner fa-spin"></i> Processando...
+    </span>
+  </button>
+</div>

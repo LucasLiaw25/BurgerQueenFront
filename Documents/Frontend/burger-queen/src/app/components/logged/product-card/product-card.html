@@ -1,0 +1,24 @@
+<div class="product-card" [routerLink]="['/product', product.id]">
+  <div class="image-container">
+    <img [src]="product.imageUrl" [alt]="product.name" class="product-img">
+    <div class="rating-badge">
+      <span class="star">★</span> {{ product.rating }}
+    </div>
+  </div>
+  
+  <div class="card-info">
+    <h3 class="product-name">{{ product.name }}</h3>
+    <p class="product-desc">{{ product.description }}</p>
+    
+    <div class="card-footer">
+      <div class="price-section">
+        <span class="price-label">Price</span>
+        <span class="price-value">{{ product.price | currency }}</span>
+      </div>
+      
+      <button class="add-btn">
+        <i class="fas fa-shopping-bag"></i> Add
+      </button>
+    </div>
+  </div>
+</div>

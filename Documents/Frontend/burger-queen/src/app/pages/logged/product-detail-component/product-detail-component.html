@@ -1,0 +1,74 @@
+<app-header></app-header>
+
+<div class="feedback-container">
+  <div class="msg-success" *ngIf="successMessage">
+    <i class="fas fa-check-circle"></i> {{ successMessage }}
+  </div>
+  <div class="msg-error" *ngIf="errorMessage">
+    <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
+  </div>
+</div>
+
+<main class="product-detail-container" *ngIf="product">
+  <div class="content-wrapper">
+    
+    <div class="image-section">
+      <div class="back-nav">
+        <a routerLink="/menu"><i class="fas fa-arrow-left"></i> Back to Menu</a>
+      </div>
+      <div class="main-image-card">
+        <img [src]="product.imageUrl" [alt]="product.name">
+        <div class="rating-badge">
+          ⭐ {{ product.rating }} <span>({{ product.ratingCount }} reviews)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <span class="category-tag">Premium Burger</span>
+      <h1 class="product-title">{{ product.name }}</h1>
+      <p class="description">{{ product.description }}</p>
+
+      <div class="price-row">
+        <span class="price">{{ product.price | currency:'BRL' }}</span>
+      </div>
+
+      <div class="action-box">
+        <div class="quantity-selector">
+          <button (click)="updateQuantity(-1)" [disabled]="loadingOrder">-</button>
+          <span>{{ quantity }}</span>
+          <button (click)="updateQuantity(1)" [disabled]="loadingOrder">+</button>
+        </div>
+        
+        <button 
+          class="add-to-cart-btn" 
+          (click)="createOrder()" 
+          [disabled]="loadingOrder">
+          
+          <i class="fas" 
+             [class.fa-shopping-bag]="!loadingOrder" 
+             [class.fa-spinner]="loadingOrder" 
+             [class.fa-spin]="loadingOrder">
+          </i>
+          
+          {{ loadingOrder ? 'Processing...' : 'Order Now' }}
+        </button>
+      </div>
+
+      <div class="extra-info">
+        <div class="info-item">
+          <i class="fas fa-truck"></i>
+          <span>Free Delivery</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-clock"></i>
+          <span>15-25 min</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<app-first-order></app-first-order>
+<app-footer></app-footer>

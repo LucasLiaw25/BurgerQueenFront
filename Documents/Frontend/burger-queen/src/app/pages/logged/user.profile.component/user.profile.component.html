@@ -1,0 +1,89 @@
+<app-header></app-header>
+
+<div class="profile-container">
+  <header class="profile-header">
+    <h1>{{ userName() }}</h1>
+    <p>Acompanhe seus pedidos e histórico de delícias.</p>
+  </header>
+
+  <div class="profile-content">
+    
+    <section class="order-section">
+      <div class="section-title">
+        <i class="fas fa-fire-alt"></i>
+        <h2>No Fogo! (Em Preparo)</h2>
+      </div>
+
+      <div class="order-card active" *ngIf="preparingOrder() as order; else noActive">
+        <div class="card-header">
+          <span>Pedido #{{ order.id }}</span>
+          <span class="badge preparing">Preparando...</span>
+        </div>
+        
+        <div class="card-body">
+          <div class="item-line" *ngFor="let item of order.items">
+            <img [src]="item.product.imageUrl || 'assets/images/default-burger.png'" class="mini-thumb">
+            <span>{{ item.quantity }}x {{ item.product.name }}</span>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <strong>Total: {{ order.amount | currency:'BRL' }}</strong>
+        </div>
+      </div>
+
+      <ng-template #noActive>
+        <div class="empty-state-mini">
+          <p>Nenhum pedido sendo preparado agora. Que tal um burger?</p>
+        </div>
+      </ng-template>
+    </section>
+
+    <section class="order-section">
+      <div class="section-title">
+        <i class="fas fa-history"></i>
+        <h2>Histórico de Pedidos</h2>
+      </div>
+
+      <div class="history-container" *ngIf="orderHistory().length > 0; else noHistory">
+        <div class="history-item-card" *ngFor="let order of orderHistory()">
+          
+          <div class="history-header">
+            <span class="order-id">Pedido #{{ order.id }}</span>
+            <span class="badge completed">Concluído</span>
+          </div>
+
+          <div class="history-details">
+            <div class="product-row" *ngFor="let item of order.items">
+              <div class="product-info-group">
+                <img [src]="item.product.imageUrl || 'assets/images/default-burger.png'" class="history-thumb">
+                <div class="product-text">
+                  <span class="product-name">{{ item.product.name }}</span>
+                  <span class="product-meta">{{ item.quantity }}x • {{ item.priceAtTime | currency:'BRL' }}</span>
+                </div>
+              </div>
+              <span class="product-subtotal">{{ (item.quantity * item.priceAtTime) | currency:'BRL' }}</span>
+            </div>
+          </div>
+
+          <div class="history-footer">
+            <div class="total-info">
+              <span>Total Pago:</span>
+              <strong>{{ order.amount | currency:'BRL' }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noHistory>
+        <div class="empty-state-mini">
+          <p>Você ainda não finalizou nenhum pedido.</p>
+        </div>
+      </ng-template>
+    </section>
+
+  </div>
+</div>
+
+<app-first-order></app-first-order>
+<app-footer></app-footer>

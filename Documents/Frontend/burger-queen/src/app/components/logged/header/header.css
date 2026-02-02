@@ -1,0 +1,298 @@
+header{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.header-container {
+  position: sticky;      
+  top: 0;               
+  z-index: 1000;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 60px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .bq-circle {
+    width: 45px;
+    height: 45px;
+    background-color: #E65100; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    .letter-b { color: #FFFFFF; }
+    .letter-q { color: #000000; }
+  }
+
+  .brand-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: #E65100;
+    letter-spacing: -0.5px;
+    cursor: pointer;
+  }
+}
+
+.nav-menu {
+  display: flex;
+  gap: 30px;
+
+  .nav-link {
+    text-decoration: none;
+    color: #A0A0A0; 
+    font-weight: 600;
+    font-size: 15px;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #E65100;
+      transition: width 0.3s ease;
+    }
+
+    &:hover {
+      color: #E65100;
+      
+      &::after {
+        width: 100%; 
+      }
+    }
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+
+  .icon-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #2D2D2D;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover { color: #E65100; }
+  }
+
+  .cart-wrapper {
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    color: #2D2D2D;
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background-color: #E63946;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 50%;
+      border: 2px solid #FFFFFF;
+    }
+  }
+
+  .user-nav-btn{
+    background-color: #E65100; 
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    &:hover {
+      background-color: #BF360C;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu { display: none; }
+  .header-container { padding: 15px 20px; }
+}
+
+/* Estilos existentes mantidos... */
+
+.search-box {
+  display: flex;
+  gap: .7rem;
+  flex: 1;
+  max-width: 300px; /* Largura máxima para desktop */
+}
+
+.search-box input {
+  border-radius: 5px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  flex: 1;
+  min-width: 0; /* Importante para flex shrink funcionar */
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #E65100;
+  box-shadow: 0 0 0 2px rgba(230, 81, 0, 0.1);
+}
+
+.search-btn {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 8px 15px;
+  transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #E65100;
+  color: white;
+  border-color: #E65100;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .search-box {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-wrap: wrap; /* Permite quebra de linha */
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  .logo-section {
+    order: 1;
+  }
+  
+  .header-actions {
+    order: 2;
+    margin-left: auto;
+  }
+  
+  .nav-menu {
+    order: 3;
+    display: none; /* Mantém escondido no mobile */
+  }
+  
+  .search-box {
+    order: 4;
+    flex: 0 0 100%; /* Ocupa linha inteira */
+    max-width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .header-actions {
+    gap: 15px;
+  }
+  
+  .search-box {
+    gap: .5rem;
+  }
+  
+  .search-box input {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  
+  .search-btn {
+    padding: 6px 12px;
+  }
+  
+  .order-btn {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+}
+
+/* Opcional: Esconder search em telas muito pequenas e mostrar ícone */
+@media (max-width: 480px) {
+  .search-box {
+    position: relative;
+  }
+  
+  .search-box input {
+    /* Opcional: transformar em ícone de busca que expande */
+    width: 0;
+    opacity: 0;
+    position: absolute;
+    right: 40px;
+    transition: all 0.3s ease;
+  }
+  
+  .search-box.active input {
+    width: 200px;
+    opacity: 1;
+    position: static;
+  }
+  
+  .search-box:not(.active) input {
+    display: none;
+  }
+  
+  .search-box:not(.active) .search-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+  }
+}
+
+/* Adicione estas regras ao seu header.css */
+
+.cart-wrapper {
+  position: relative;
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  transition: transform 0.2s ease;
+}
+
+.cart-wrapper:hover {
+  transform: scale(1.1); /* Efeito de hover */
+}
+
+.cart-icon {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.search-input{
+  padding: 4px;
+  border: solid gray 1px;
+  border-radius: 6px;
+}

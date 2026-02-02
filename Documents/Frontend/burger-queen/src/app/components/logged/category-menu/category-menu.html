@@ -1,0 +1,25 @@
+<section class="category-section">
+  <div class="category-container">
+    <div class="category-header">
+      <h2 class="title">Popular Menu</h2>
+      <p class="subtitle">Choose your favorite category</p>
+    </div>
+    
+    <div class="category-list">
+      <button 
+        (click)="selectCategory(0)"
+        [class.active]="activeCategory === 0"
+        class="category-btn">
+        All
+      </button>
+      
+      <button 
+        *ngFor="let cat of categories"
+        (click)="selectCategory(cat.id)"
+        [class.active]="activeCategory === cat.id"
+        class="category-btn">
+        {{ cat.name }}
+      </button>
+    </div>
+  </div>
+</section>

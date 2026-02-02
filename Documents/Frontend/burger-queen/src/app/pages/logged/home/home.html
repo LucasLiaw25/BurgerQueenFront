@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+<main class="min-h-screen bg-white">
+  <app-hero></app-hero>
+
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    
+    <app-category-menu 
+      (categoryChanged)="onCategoryChange($event)">
+    </app-category-menu>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
+      <app-product-card 
+        *ngFor="let item of filteredProducts" 
+        [product]="item">
+      </app-product-card>
+    </div>
+
+    <div *ngIf="filteredProducts.length === 0" class="text-center py-12">
+      <p class="text-gray-500 text-lg">No products found in this category.</p>
+    </div>
+
+  </section>
+</main>
+
+<app-first-order></app-first-order>
+
+<app-footer></app-footer>

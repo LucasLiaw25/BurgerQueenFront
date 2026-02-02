@@ -1,0 +1,115 @@
+.product-card {
+  background: #fff;
+  border-radius: 25px;
+  padding: 18px;
+  border: none;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+
+  &:hover {
+    
+    box-shadow: 0 20px 30px rgba(230, 81, 0, 0.15);
+
+    .product-name {
+      color: #E65100;
+    }
+
+    .product-img {
+      transform: scale(1.15);
+    }
+  }
+
+  .image-container {
+    position: relative;
+    height: 190px;
+    border-radius: 20px;
+    overflow: hidden; 
+    margin-bottom: 15px;
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease; 
+    }
+
+    .rating-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(4px);
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      z-index: 2;
+
+      .star { color: #FFB800; }
+    }
+  }
+
+  .product-name {
+    font-size: 19px;
+    font-weight: 800;
+    color: #2D2D2D;
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+  }
+
+  .product-desc {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 22px;
+    line-height: 1.5;
+    height: 40px; 
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .price-label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #bbb;
+    }
+
+    .price-value {
+      font-size: 20px;
+      font-weight: 900;
+      color: #E63946;
+    }
+
+    .add-btn {
+      background: #2D2D2D;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #000;
+        transform: scale(1.05);
+      }
+    }
+  }
+}

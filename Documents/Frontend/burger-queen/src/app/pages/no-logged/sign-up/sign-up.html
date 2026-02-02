@@ -1,0 +1,242 @@
+<div class="signup-page">
+  <div class="success-toast" *ngIf="successMessage">
+    <div class="toast-content">
+      <i class="fas fa-check-circle"></i>
+      <div class="toast-text">
+        <strong>Sucesso!</strong>
+        <span>{{ successMessage }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="visual-side">
+    <div class="brand-floating">
+      <div class="bq-circle-large">
+        <span class="letter-b">B</span><span class="letter-q">Q</span>
+      </div>
+      <h2>Burger Queen</h2>
+    </div>
+    
+    <div class="illustration-container">
+      <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600" alt="Burger" class="floating-burger">
+      <div class="blob-bg"></div>
+    </div>
+
+    <div class="welcome-text">
+      <h3>Bem-vindo à realeza!</h3>
+      <p>Cadastre-se para obter benefícios exclusivos e entregas rápidas.</p>
+    </div>
+  </div>
+
+  <div class="form-side">
+    
+    <div class="form-container">
+      <header>
+        <h1>Seus dados</h1>
+        <p>Digite suas informações para se registrar.</p>
+      </header>
+
+      <!-- Mensagem de erro geral -->
+      <div *ngIf="errorMessage" class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <form class="signup-form" [formGroup]="signupForm" (ngSubmit)="onRegister()">
+        <!-- Nome Completo -->
+        <div class="input-group">
+          <label for="name">Nome Completo *</label>
+          <input 
+            type="text" 
+            id="name"
+            formControlName="name"
+            placeholder="Como devemos te chamar?"
+            [class.error]="f['name'].invalid && f['name'].touched">
+          
+          <div *ngIf="f['name'].invalid && f['name'].touched" class="error-text">
+            <div *ngIf="nameErrors['required']">
+              Nome é obrigatório
+            </div>
+            <div *ngIf="nameErrors['minlength']">
+              Nome deve ter pelo menos 3 caracteres
+            </div>
+          </div>
+        </div>
+
+        <!-- Telefone e CPF -->
+        <div class="input-row">
+          <div class="input-group">
+            <label for="phone">Telefone *</label>
+            <input 
+              type="text" 
+              id="phone"
+              formControlName="phone"
+              placeholder="(00) 00000-0000"
+              (input)="onPhoneInput($event)"
+              maxlength="15"
+              [class.error]="f['phone'].invalid && f['phone'].touched">
+            
+            <div *ngIf="f['phone'].invalid && f['phone'].touched" class="error-text">
+              Telefone inválido (formato: (00) 00000-0000)
+            </div>
+          </div>
+          
+          <div class="input-group">
+            <label for="cpf">CPF *</label>
+            <input 
+              type="text" 
+              id="cpf"
+              formControlName="cpf"
+              placeholder="000.000.000-00"
+              (input)="onCPFInput($event)"
+              maxlength="14"
+              [class.error]="f['cpf'].invalid && f['cpf'].touched">
+            
+            <div *ngIf="f['cpf'].invalid && f['cpf'].touched" class="error-text">
+              CPF inválido (formato: 000.000.000-00)
+            </div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="input-group">
+          <label for="email">E-mail *</label>
+          <input 
+            type="email" 
+            id="email"
+            formControlName="email"
+            placeholder="seu@email.com"
+            [class.error]="f['email'].invalid && f['email'].touched">
+          
+          <div *ngIf="f['email'].invalid && f['email'].touched" class="error-text">
+            <div *ngIf="emailErrors['required']">
+              E-mail é obrigatório
+            </div>
+            <div *ngIf="emailErrors['email']">
+              E-mail inválido
+            </div>
+          </div>
+        </div>
+
+        <!-- Senha -->
+        <div class="input-group">
+          <label for="password">Senha *</label>
+          <div class="password-wrapper">
+            <input 
+              [type]="getPasswordType('password')" 
+              id="password"
+              formControlName="password"
+              placeholder="Mínimo 8 caracteres"
+              [class.error]="f['password'].invalid && f['password'].touched">
+            <i 
+              class="fas" 
+              [class.fa-eye]="!showPassword" 
+              [class.fa-eye-slash]="showPassword"
+              (click)="togglePasswordVisibility('password')"
+              title="Mostrar/ocultar senha">
+            </i>
+          </div>
+          
+          <!-- Indicador de força da senha -->
+          <div *ngIf="f['password'].value" class="password-strength">
+            <div class="strength-bar">
+              <div class="strength-fill" [style.width.%]="getPasswordStrength().strength * 25"></div>
+            </div>
+            <span class="strength-text">{{ getPasswordStrength().message }}</span>
+          </div>
+          
+          <!-- Requisitos da senha -->
+          <ul class="requirements">
+            <li [class.valid]="isPasswordRequirementMet('length')">
+              Deve ter no mínimo 8 caracteres
+            </li>
+            <li [class.valid]="isPasswordRequirementMet('uppercase')">
+              Deve incluir letra maiúscula
+            </li>
+            <li [class.valid]="isPasswordRequirementMet('lowercase')">
+              Deve incluir letra minúscula
+            </li>
+            <li [class.valid]="isPasswordRequirementMet('number')">
+              Deve incluir números
+            </li>
+          </ul>
+          
+          <!-- Mensagens de erro da senha -->
+          <div *ngIf="f['password'].invalid && f['password'].touched" class="error-text">
+            <div *ngIf="passwordErrors['required']">
+              Senha é obrigatória
+            </div>
+            <div *ngIf="passwordErrors['uppercase']">
+              {{ passwordErrors['uppercase'] }}
+            </div>
+            <div *ngIf="passwordErrors['lowercase']">
+              {{ passwordErrors['lowercase'] }}
+            </div>
+            <div *ngIf="passwordErrors['numeric']">
+              {{ passwordErrors['numeric'] }}
+            </div>
+            <div *ngIf="passwordErrors['minlength']">
+              {{ passwordErrors['minlength'] }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirmar Senha -->
+        <div class="input-group">
+          <label for="confirmPassword">Confirmar Senha *</label>
+          <div class="password-wrapper">
+            <input 
+              [type]="getPasswordType('confirmPassword')" 
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              placeholder="Confirme sua senha"
+              [class.error]="(f['confirmPassword'].invalid || signupForm.errors?.['passwordMismatch']) && f['confirmPassword'].touched">
+            <i 
+              class="fas" 
+              [class.fa-eye]="!showConfirmPassword" 
+              [class.fa-eye-slash]="showConfirmPassword"
+              (click)="togglePasswordVisibility('confirmPassword')"
+              title="Mostrar/ocultar senha">
+            </i>
+          </div>
+          
+          <!-- Mensagens de erro da confirmação de senha -->
+          <div *ngIf="f['confirmPassword'].invalid && f['confirmPassword'].touched" class="error-text">
+            <div *ngIf="confirmPasswordErrors['required']">
+              Confirmação de senha é obrigatória
+            </div>
+          </div>
+          
+          <div *ngIf="signupForm.errors?.['passwordMismatch'] && f['confirmPassword'].touched" class="error-text">
+            As senhas não coincidem
+          </div>
+        </div>
+        
+        <!-- Termos e Condições -->
+        <div class="checkbox-group">
+          <input 
+            type="checkbox" 
+            id="terms"
+            formControlName="terms">
+          <label for="terms">
+            Ao se cadastrar, você concorda com os <span>Termos e Condições</span>.
+          </label>
+          <div *ngIf="f['terms'].invalid && f['terms'].touched" class="error-text">
+            Você deve aceitar os termos e condições
+          </div>
+        </div>
+
+        
+        <button 
+          type="submit" 
+          class="btn-continue"
+          [disabled]="signupForm.invalid">
+          Continuar
+        </button>
+      </form>
+
+      <footer class="form-footer">
+        Já tem uma conta? <a [routerLink]="['/']" id="loginLink">Fazer login</a>
+      </footer>
+    </div>
+  </div>
+</div>

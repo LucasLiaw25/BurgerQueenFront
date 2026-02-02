@@ -1,0 +1,241 @@
+/* 1. CONTAINER PRINCIPAL (PAINEL LATERAL) */
+.side-cart-panel {
+  position: fixed; /* Tira o elemento do fluxo da página para ele não empurrar o Header */
+  top: 0;
+  right: -400px; /* Escondido totalmente à direita por padrão */
+  width: 380px; /* Largura fixa do carrinho */
+  max-width: 90vw; /* Garante que em celulares ele não ultrapasse a tela */
+  height: 100vh; /* Ocupa toda a altura da tela */
+  background-color: #ffffff;
+  z-index: 10000; /* Valor bem alto para ficar acima de qualquer outro componente */
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transição suave de deslize */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. ESTADO ABERTO */
+.side-cart-panel.open {
+  right: 0; /* Desliza para dentro da tela */
+}
+
+/* 3. OVERLAY (FUNDO ESCURO) */
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de transparência */
+  backdrop-filter: blur(4px); /* Efeito de desfoque no fundo */
+  z-index: 9999; /* Um nível abaixo do painel lateral */
+}
+
+/* 4. CABEÇALHO DO CARRINHO */
+.cart-header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-header h2 {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.close-icon {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.close-icon:hover {
+  color: #e67e22; /* Cor da sua marca no hover */
+}
+
+/* 5. CORPO DO CARRINHO (LISTA DE ITENS) */
+.cart-body {
+  flex: 1; /* Faz o corpo ocupar todo o espaço restante */
+  overflow-y: auto; /* Permite scroll se houver muitos itens */
+  padding: 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #fafafa;
+}
+
+.item-details h4 {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+.item-details p {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.btn-remove {
+  background: #fff5f5;
+  border: none;
+  color: #ff4757;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-remove:hover {
+  background: #ff4757;
+  color: white;
+}
+
+/* 6. RODAPÉ (TOTAL E PAGAMENTO) */
+.cart-footer {
+  padding: 25px;
+  background-color: #fdfdfd;
+  border-top: 1px solid #f0f0f0;
+}
+
+.total-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.total-container strong {
+  font-size: 1.4rem;
+  color: #2d3436;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #e67e22; /* Laranja da BurgerQueen */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #d35400;
+}
+
+/* 7. ESTADO VAZIO */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #bdc3c7;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+/* CONTAINER DA IMAGEM */
+.item-img-container {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid #fff;
+  transition: all 0.3s ease;
+}
+
+.item-img-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.item-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.item-img-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Ajuste para itens do carrinho */
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-details h4 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.item-details p {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.success-toast {
+  background-color: #2ecc71; /* Verde esmeralda */
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  right: 10px;
+  z-index: 99;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

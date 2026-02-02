@@ -1,0 +1,42 @@
+<app-header></app-header>
+
+<main class="coupons-page">
+  <section class="max-w-7xl mx-auto px-6 py-12">
+    
+    <header class="page-header">
+      <span class="badge">Ofertas Reais</span>
+      <h1>Cupons de <span class="orange">Desconto</span></h1>
+      <p>Escolha um produto e gere seu cupom exclusivo de 25% OFF agora mesmo!</p>
+    </header>
+
+    <div *ngFor="let group of groupedCoupons" class="category-section">
+      <h2 class="category-title">{{ group.categoryName }}</h2>
+      
+      <div class="coupon-grid">
+        <div class="coupon-card" [routerLink]="['/coupon', item.id]" *ngFor="let item of group.products">
+          <div class="image-box">
+            <img [src]="item.imageUrl" [alt]="item.name">
+            <div class="discount-tag">-25%</div>
+          </div>
+
+          <div class="coupon-info">
+            <h3>{{ item.name }}</h3>
+            <div class="price-container">
+              <span class="old-price">{{ item.price | currency }}</span>
+              <span class="new-price">{{ item.discountedPrice | currency }}</span>
+            </div>
+            
+            <button class="claim-btn" (click)="generateCoupon(item.id)">
+              <i class="fas fa-ticket-alt"></i> Resgatar Cupom
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<app-first-order></app-first-order>
+
+<app-footer></app-footer>

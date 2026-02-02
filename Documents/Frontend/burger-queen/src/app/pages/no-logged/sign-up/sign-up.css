@@ -1,0 +1,464 @@
+.signup-page {
+  display: flex;
+  min-height: 100vh;
+  background-color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.visual-side {
+  flex: 1.2;
+  background-color: #FFF9F3; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: 1024px) { display: none; }
+
+  .brand-floating {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    
+    .bq-circle-large {
+      width: 50px;
+      height: 50px;
+      background: #E65100;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #fff;
+      .letter-q { color: #000; }
+    }
+
+    h2 { font-weight: 800; color: #2D2D2D; font-size: 20px; }
+  }
+
+  .illustration-container {
+    position: relative;
+    z-index: 2;
+
+    .floating-burger {
+      width: 400px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 15px solid #fff;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .blob-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(230, 81, 0, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+      z-index: -1;
+    }
+  }
+
+  .welcome-text {
+    margin-top: 40px;
+    text-align: center;
+    max-width: 400px;
+    h3 { font-size: 28px; font-weight: 900; color: #2D2D2D; }
+    p { color: #777; margin-top: 10px; line-height: 1.6; }
+  }
+}
+
+.form-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+
+  .form-container {
+    width: 100%;
+    max-width: 480px;
+
+    header {
+      margin-bottom: 35px;
+      h1 { font-size: 36px; font-weight: 900; color: #2D2D2D; }
+      p { color: #888; font-size: 15px; }
+    }
+  }
+}
+
+.signup-form {
+  .input-group {
+    margin-bottom: 20px;
+    label { display: block; font-size: 13px; font-weight: 700; color: #444; margin-bottom: 8px; }
+    input {
+      width: 100%;
+      padding: 14px 0;
+      border: none;
+      border-bottom: 2px solid #F0F0F0;
+      font-size: 15px;
+      transition: all 0.3s;
+      outline: none;
+      &:focus { border-color: #E65100; }
+    }
+  }
+
+  .input-row {
+    display: flex;
+    gap: 20px;
+    .input-group { flex: 1; }
+  }
+
+  .password-wrapper {
+    position: relative;
+    i { position: absolute; right: 0; top: 15px; color: #999; cursor: pointer; }
+  }
+
+  .requirements {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    li { font-size: 11px; color: #aaa; margin-bottom: 4px; }
+  }
+
+  .checkbox-group {
+    display: flex;
+    gap: 10px;
+    margin: 25px 0;
+    label { font-size: 13px; color: #777; span { color: #E65100; font-weight: 600; cursor: pointer; } }
+  }
+
+  .btn-continue {
+    width: 100%;
+    background-color: #FFC107; 
+    color: #2D2D2D;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover { background-color: #FFB300; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255, 179, 0, 0.2); }
+  }
+}
+
+.form-footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+  a { color: #E65100; font-weight: 700; text-decoration: none; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+#loginLink:hover{
+    text-decoration: underline;
+}
+
+/* Estilos para validação */
+.error-message {
+  background-color: #fee;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.error-message i {
+  color: #dc3545;
+  font-size: 18px;
+}
+
+.error-message span {
+  color: #721c24;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.error-text {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 5px;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.error-text div {
+  margin-bottom: 2px;
+}
+
+.input-group input.error {
+  border-color: #dc3545 !important;
+  border-width: 2px !important;
+}
+
+.input-group input:valid:not(.error) {
+  border-color: #28a745 !important;
+}
+
+/* Botão desabilitado */
+.btn-continue:disabled {
+  background-color: #ccc !important;
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+  transform: none !important;
+}
+
+.btn-continue:disabled:hover {
+  background-color: #ccc !important;
+  box-shadow: none !important;
+}
+
+/* Força da senha */
+.password-strength {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.strength-bar {
+  flex: 1;
+  height: 4px;
+  background-color: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.strength-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* Cores baseadas na força */
+.strength-fill[style*="width: 25%"] {
+  background-color: #dc3545;
+}
+
+.strength-fill[style*="width: 50%"],
+.strength-fill[style*="width: 75%"] {
+  background-color: #ffc107;
+}
+
+.strength-fill[style*="width: 100%"] {
+  background-color: #28a745;
+}
+
+.strength-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  min-width: 70px;
+}
+
+/* Requisitos da senha */
+.requirements {
+  list-style: none;
+  padding: 8px 0 0 16px;
+  margin: 0;
+}
+
+.requirements li {
+  font-size: 11px;
+  color: #dc3545;
+  margin-bottom: 4px;
+  position: relative;
+  padding-left: 20px;
+  transition: color 0.3s ease;
+}
+
+.requirements li:before {
+  content: '✗';
+  position: absolute;
+  left: 0;
+  color: #dc3545;
+  transition: color 0.3s ease, content 0.3s ease;
+}
+
+.requirements li.valid {
+  color: #28a745;
+}
+
+.requirements li.valid:before {
+  content: '✓';
+  color: #28a745;
+}
+
+/* Checkbox com erro */
+.checkbox-group {
+  position: relative;
+  margin: 15px 0;
+}
+
+.checkbox-group input[type="checkbox"]:invalid {
+  outline: 2px solid #dc3545;
+  outline-offset: 2px;
+}
+
+.checkbox-group label {
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.checkbox-group label span {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Ícones de olho */
+.password-wrapper i {
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+  padding: 0 10px;
+}
+
+.password-wrapper i:hover {
+  color: #333;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .input-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .password-strength {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .strength-bar {
+    width: 100%;
+  }
+}
+
+/* --- Efeito de Redirecionamento --- */
+
+/* Desfoque suave no fundo */
+.blurred {
+  filter: blur(8px) grayscale(20%);
+  pointer-events: none;
+  user-select: none;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Toast de Sucesso Premium */
+.success-toast {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  min-width: 350px;
+  background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+  color: white;
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(27, 94, 32, 0.4);
+  z-index: 9999;
+  overflow: hidden; /* Importante para a barra de progresso */
+  animation: slideInRight 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.toast-content i {
+  font-size: 32px;
+  color: #a5d6a7;
+}
+
+.toast-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.toast-text strong {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.toast-text span {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Barra de progresso (Sincronize o tempo com o seu setTimeout) */
+.success-toast::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  width: 0%;
+  animation: progressBar 3s linear forwards;
+}
+
+/* --- Loader do Botão --- */
+.loader-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-continue:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* --- Animações --- */
+@keyframes slideInRight {
+  0% { transform: translateX(120%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes progressBar {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Efeito de brilho no toast */
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}

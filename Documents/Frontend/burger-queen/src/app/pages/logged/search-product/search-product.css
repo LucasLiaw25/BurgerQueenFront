@@ -1,0 +1,103 @@
+/* --- 1. Cabeçalho da Busca (Resultados para: e X produtos) --- */
+.search-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-top: 2rem;
+}
+
+.search-header h2 {
+  font-size: 1.8rem;
+  color: #2d2d2d;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.search-header h2 span {
+  color: #e67e22; /* Laranja da marca */
+  font-style: italic;
+  position: relative;
+}
+
+.search-header p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* --- 2. Container de Loading (Buscando os melhores burgers...) --- */
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+  color: #d35400;
+  font-weight: 600;
+  gap: 15px;
+}
+
+.loader i {
+  font-size: 3rem;
+  /* Gradiente suave no ícone se quiser dar um toque premium */
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- 3. Efeito de Animação para o texto de Loading --- */
+.loader::after {
+  content: "";
+  width: 100px;
+  height: 4px;
+  background: #eee;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.loader::after {
+  /* Barra de progresso infinita embaixo do texto */
+  display: block;
+  background: linear-gradient(to right, #e67e22 30%, #eee 30%);
+  background-size: 200% 100%;
+  animation: loadingBar 1.5s infinite linear;
+}
+
+@keyframes loadingBar {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* --- 4. Ajuste para a Grid (Evitar que fique colada) --- */
+.max-w-7xl {
+  transition: opacity 0.3s ease;
+}
+
+/* --- 5. Estilo para o Estado Vazio --- */
+.no-results {
+  text-align: center;
+  padding: 5rem 1rem;
+}
+
+.no-results i {
+  font-size: 4rem;
+  color: #bdc3c7;
+  margin-bottom: 1.5rem;
+}
+
+.no-results button {
+  margin-top: 1.5rem;
+  padding: 12px 25px;
+  background-color: #2d2d2d;
+  color: white;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.no-results button:hover {
+  background-color: #e67e22;
+}
